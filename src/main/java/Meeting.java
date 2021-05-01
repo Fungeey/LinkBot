@@ -1,20 +1,24 @@
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 
 public class Meeting {
-	public static HashSet<String> courses;
-	public static List<Meeting> allMeetings;
-	public String course;
+	public static ArrayList<Meeting> allMeetings = new ArrayList<>();
+	public Course course;
 	public String link;
 	public Date time;
 	public String description;
 
 	public Meeting(String course, String link, Date time, String description){
-		courses.add(course);
+		if(Course.courses.containsKey(course))
+			this.course = Course.courses.get(course);
+		else
+			this.course = new Course(course);
+
+		this.course.addMeeting(this);
 		this.link = link;
 		this.time = time;
 		this.description = description;
+		allMeetings.add(this);
 	}
 
 	public boolean equals(Object other) {
@@ -23,5 +27,10 @@ public class Meeting {
 
 		Meeting meeting = (Meeting)other;
 		return meeting.course.equals(this.course) && meeting.time.equals(this.time);
+	}
+
+	@Override
+	public String toString() {
+		return course.code + " " + description + " @ " + time.toString() + " <" + link + ">";
 	}
 }
