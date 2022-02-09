@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Meeting {
-	public static ArrayList<Meeting> allMeetings = new ArrayList<>();
 	public Course course;
 	public String link;
 	public Date time;
@@ -18,7 +17,6 @@ public class Meeting {
 		this.link = link;
 		this.time = time;
 		this.description = description;
-		allMeetings.add(this);
 	}
 
 	public boolean equals(Object other) {
@@ -31,6 +29,6 @@ public class Meeting {
 
 	@Override
 	public String toString() {
-		return course.code + " " + description + " @ " + time.toString() + " <" + link + ">";
+		return "[" + course.code + " " + description + " @ " + time.toString() + "](" + link + ")";
 	}
 }
